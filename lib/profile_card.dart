@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:responsive_design/login_screen.dart';
 
 class ProfileCard extends StatelessWidget {
   const ProfileCard({super.key});
@@ -17,11 +17,11 @@ class ProfileCard extends StatelessWidget {
             builder: (context, constraints) {
               if (constraints.maxWidth > 600) {
                 return Row(  //for a wide layout
-               // mainAxisSize: MainAxisSize.min,
+                // mainAxisSize: MainAxisSize.min,
                   children: [
                     _buildAvatar(),
                     const SizedBox(width: 20),
-                    Expanded(child: _buildContent()),
+                    _buildContent(context),
                   ],
                 );
               }//end of if statment
@@ -32,7 +32,7 @@ class ProfileCard extends StatelessWidget {
                 children: [
                   _buildAvatar(),
                   SizedBox(height: 20),
-                  _buildContent(),
+                  _buildContent(context),
                 ],
               );}
             },
@@ -60,19 +60,25 @@ Widget _buildAvatar() {
 }
 
 // content widget for the profile
-Widget _buildContent() {
+Widget _buildContent( BuildContext context) {
   return Center(
     child: Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Some Name',
+          'Fluffy Giggles',
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
         Text('Favorite Class cs:220'),
         SizedBox(height: 20),
-        ElevatedButton(onPressed: () {}, child: Text('Log in')),
+        ElevatedButton(onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => LoginScreen()),
+          );
+        },
+         child: Text('Log in')),
       ],
     ),
   );
