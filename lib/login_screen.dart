@@ -70,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
         return null; // no error
       }, //end of validator
     );
-  }//end of username function
+  }//end of username widget
 
   Widget _password() {
     //bool _passHidden;
@@ -92,17 +92,26 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       validator: null, //TODO fix 
     );
-  }//end of username function
+  }//end of password widget
 
   Widget _loginButton () {
     return ElevatedButton(
-      onPressed: _submitLogin(), 
+      onPressed: _submitLogin, 
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.symmetric(vertical: 16),
         textStyle: const TextStyle(fontSize: 18),
       ), //end of button styeform
       child: const Text('Login'));
-  }
+  }// end of login button widget
+
+  void _submitLogin() {
+    if (_formKey.currentState!.validate()){
+      final username = _usernameController.text.trim();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('loggin in user $username')),
+      );
+    }//end of if statment
+  }//end of submit login function for login button
 
 
 } //end of login-screen state calss
