@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+   LoginScreen({super.key});
   //bool _passHidden;
 
   @override
@@ -10,7 +10,13 @@ class LoginScreen extends StatefulWidget {
  
 class _LoginScreenState extends State<LoginScreen> {
 //since we will have text fields that will be typed into this needs to be a stateFULL widget
-bool _passHidden = true;
+  bool _passHidden = true;
+
+  final _formKey = GlobalKey<FormState>();
+
+  final _usernameController = TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +25,7 @@ bool _passHidden = true;
         child: SingleChildScrollView(
           padding: EdgeInsets.all(24),
           child: Form(
-            key: null, // like an id for a particular form
+            key: _formKey, // like an id for a particular form
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -29,6 +35,8 @@ bool _passHidden = true;
                 _username(),
                 const SizedBox(height: 20,),
                 _password(),
+                const SizedBox(height: 20,),
+                _loginButton(),
               ]
             ),
           ),
@@ -49,13 +57,18 @@ bool _passHidden = true;
 
   Widget _username() {
     return TextFormField(
-      controller: null,
+      controller: _usernameController,
       decoration: const InputDecoration(
         labelText: 'Username',
         border: OutlineInputBorder(),
         prefixIcon: Icon(Icons.person),
       ),
-      validator: null, //TODO fix
+      validator: (value) {
+        if (value == null || value.trim().isEmpty){
+          return 'Please enter your username';
+        }//end of if statment
+        return null; // no error
+      }, //end of validator
     );
   }//end of username function
 
@@ -64,22 +77,32 @@ bool _passHidden = true;
     return TextFormField(
       controller: null, //TODO fix
       obscureText: _passHidden,
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         labelText: 'Password',
-        border: OutlineInputBorder(),
-        prefixIcon: Icon(Icons.lock),
+        border: const OutlineInputBorder(),
+        prefixIcon: const Icon(Icons.lock),
         suffixIcon: IconButton(
           icon: Icon(_passHidden ? Icons.visibility_off : Icons.visibility),
-          onPressed: onPressed () {
+          onPressed: () {
             setState(() {
               _passHidden = !_passHidden;
             },);
           }, //end of on pressed
           ),
       ),
-     
+      validator: null, //TODO fix 
     );
   }//end of username function
+
+  Widget _loginButton () {
+    return ElevatedButton(
+      onPressed: _submitLogin(), 
+      style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        textStyle: const TextStyle(fontSize: 18),
+      ), //end of button styeform
+      child: const Text('Login'));
+  }
 
 
 } //end of login-screen state calss
