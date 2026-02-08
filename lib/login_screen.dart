@@ -16,6 +16,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final _usernameController = TextEditingController();
 
+  final _passwordController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _password() {
     //bool _passHidden;
     return TextFormField(
-      controller: null, //TODO fix
+      controller: _passwordController, //TODO fix
       obscureText: _passHidden,
       decoration: InputDecoration(
         labelText: 'Password',
@@ -96,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _loginButton () {
     return ElevatedButton(
-      onPressed: _submitLogin, 
+      onPressed: _submitLogin(), 
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.symmetric(vertical: 16),
         textStyle: const TextStyle(fontSize: 18),
@@ -104,13 +106,19 @@ class _LoginScreenState extends State<LoginScreen> {
       child: const Text('Login'));
   }// end of login button widget
 
-  void _submitLogin() {
-    if (_formKey.currentState!.validate()){
+  Widget _submitLogin() {
+    
+    if (){ 
+      if (_formKey.currentState!.validate()){
       final username = _usernameController.text.trim();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('loggin in user $username')),
       );
     }//end of if statment
+    else {
+
+    }
+    }
   }//end of submit login function for login button
 
 
