@@ -64,7 +64,7 @@ Widget _buildContent( BuildContext context) {
   return Center(
     child: Column(
       mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
           'Fluffy Giggles',
