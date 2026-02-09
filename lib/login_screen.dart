@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
+//import 'package:http/http.dart';
 
 class LoginScreen extends StatefulWidget {
    LoginScreen({super.key});
@@ -109,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _submitLogin() {
     
-    if (){ 
+    //if (){ 
       if (_formKey.currentState!.validate()){
       final username = _usernameController.text.trim();
       ScaffoldMessenger.of(context).showSnackBar(
@@ -119,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
     else {
 
     }
-    }
+    //}
   }//end of submit login function for login button
 
 
