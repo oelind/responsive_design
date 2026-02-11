@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_design/auth_servisce.dart';
 //import 'package:http/http.dart';
+import 'profile_card.dart';
 
 class LoginScreen extends StatefulWidget {
    LoginScreen({super.key});
@@ -18,6 +20,11 @@ class _LoginScreenState extends State<LoginScreen> {
   final _usernameController = TextEditingController();
 
   final _passwordController = TextEditingController();
+
+  bool _isLoading = false;
+
+  final authService = AuthServisce();
+
 
 
   @override
@@ -40,6 +47,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 _password(),
                 const SizedBox(height: 20,),
                 _loginButton(),
+                const SizedBox(height: 20,),
+
+
+                _isLoading ? const CircularProgressIndicator() : _loginButton(),
               ]
             ),
           ),
@@ -93,7 +104,12 @@ class _LoginScreenState extends State<LoginScreen> {
           }, //end of on pressed
           ),
       ),
-      validator: null, //TODO fix 
+      validator: (value) {
+        if (value == null || value.trim().isEmpty || value.length < 8){
+          return 'Please enter your username';
+        }//end of if statment
+        return null; // no error
+      }, //end of validator //TODO fix 
     );
   }//end of password widget
 
@@ -107,8 +123,46 @@ class _LoginScreenState extends State<LoginScreen> {
       child: const Text('Login'));
   }// end of login button widget
 
-  Widget _submitLogin() {
+  void _submitLogin() {
     
+    if (!_formKey.currentState!.validate()) return;
+
+    //while loading the circle will appear
+    setState(() => _isLoading = true);
+
+    final email = _usernameController.text;
+    final password = _passwordController.text;
+
+    try{
+      await _authService.signIn(email: email, password: password);
+
+      if (!mounted) return; //TODO signOut?
+
+      //if successful (in signing in) then go back to Profile card
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const ProfileCard()),
+      );
+    }//end of try
+      catch(e){
+        if(!mounted) return; //TODO error
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(e.toString()),
+            backgroundColor: Colors.red,
+            ),
+          );
+      }//end of catch
+
+    finally {
+      if(mounted) {
+        setState(() => isLoading = false);
+      }
+    }
+
+    }//end of submitting login function
+
+
     //if (){ 
       if (_formKey.currentState!.validate()){
       final username = _usernameController.text.trim();
