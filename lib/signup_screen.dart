@@ -1,20 +1,17 @@
+
 import 'package:flutter/material.dart';
 import 'package:responsive_design/auth_service.dart';
-import 'package:http/http.dart';
-import 'profile_card.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
-class LoginScreen extends StatefulWidget {
-   LoginScreen({super.key});
-  //bool _passHidden;
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignupScreen> createState() => _SignupScreen();
 }
- 
-class _LoginScreenState extends State<LoginScreen> {
-//since we will have text fields that will be typed into this needs to be a stateFULL widget
-  bool _passHidden = true;
+
+class _SignupScreen extends State<SignupScreen> {
+
+    bool _passHidden = true;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -23,10 +20,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordController = TextEditingController();
 
   bool _isLoading = false; // spinning circle feedback (ie loading)
-
-  final authService = AuthService();
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +51,10 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       )
     );
-  } //end of build widget
+  }//end of build widget
+} //end of class
+
+
 
 //header function
   Widget _header() {
@@ -116,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _loginButton () {
     return ElevatedButton(
-      onPressed: _submitLogin(), 
+      onPressed: _submitSignup(), 
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.symmetric(vertical: 16),
         textStyle: const TextStyle(fontSize: 18),
@@ -124,9 +120,9 @@ class _LoginScreenState extends State<LoginScreen> {
       child: const Text('Login'));
   }// end of login button widget
 
-  void _submitLogin() async {
+  void _submitSignup() async {
     
-    if (!_formKey.currentState!.validate()) return ;
+    if (!_formKey.currentState!.validate()) return;
 
     //while loading the circle will appear
     setState(() => _isLoading = true);
@@ -145,8 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
       );
     }//end of try
       catch(e){
-        //https://pub.dev/packages/fluttertoast used for documentation on toast(s)
-        if(!mounted) return Fluttertoast.showToast('Error in authenticating Username and/ or password: '); //TODO error
+        if(!mounted) return ; //TODO error
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -164,21 +159,3 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
     }//end of submitting login function
-
-/*
-    //if (){ 
-      if (_formKey.currentState!.validate()){
-        final username = _usernameController.text.trim();
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('loggin in user $username')),
-        );
-      }//end of if statment
-    else {
-      
-    }
-    //}
-    */
-  }//end of submit login function for login button
-
-
-//} //end of login-screen state calss

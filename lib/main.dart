@@ -9,7 +9,9 @@ void main() async{
 //make sure flutter is ready before we call login service
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFireBaseOptions.currentPlatform
+  );
 
 
   runApp(const MyApp());
@@ -24,7 +26,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Responsive Design',
       home: const ProfileCard(
-        
        
       ),
       
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+/*
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
@@ -116,4 +118,5 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-}
+  */
+//}
