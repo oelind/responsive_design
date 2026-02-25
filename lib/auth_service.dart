@@ -7,7 +7,7 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   //login
-  Future<User?> signIn({
+  Future<User?> _AuthService({
     required String email,
     required String password,
   }) async {

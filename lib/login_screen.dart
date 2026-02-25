@@ -146,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
     }//end of try
       catch(e){
         //https://pub.dev/packages/fluttertoast used for documentation on toast(s)
-        if(!mounted) return Fluttertoast.showToast('Error in authenticating Username and/ or password: '); //TODO error
+        if(!mounted) return Fluttertoast.showToast(msg: 'Error in authenticating Username and/ or password:' ); //TODO error
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(

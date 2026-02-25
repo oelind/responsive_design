@@ -11,7 +11,7 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreen extends State<SignupScreen> {
 
-    bool _passHidden = true;
+  bool _passHidden = true;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -60,7 +60,7 @@ class _SignupScreen extends State<SignupScreen> {
   Widget _header() {
     //assuming user already has login set up
     return const Text(
-      'Welcome back',
+      'Sign up here',
       style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
       textAlign: TextAlign.center,
     );
@@ -76,7 +76,7 @@ class _SignupScreen extends State<SignupScreen> {
       ),
       validator: (value) {
         if (value == null || value.trim().isEmpty){
-          return 'Please enter your username';
+          return 'Please enter a username';
         }//end of if statment
         return null; // no error
       }, //end of validator
@@ -103,7 +103,7 @@ class _SignupScreen extends State<SignupScreen> {
       ),
       validator: (value) {
         if (value == null || value.trim().isEmpty || value.length < 8){
-          return 'Please enter your username';
+          return 'Please enter a password longer than 6 characters and that contains one number and one special character';
         }//end of if statment
         return null; // no error
       }, //end of validator //TODO fix 
@@ -158,4 +158,4 @@ class _SignupScreen extends State<SignupScreen> {
       }
     }
 
-    }//end of submitting login function
+  }//end of submitting login function
