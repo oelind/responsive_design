@@ -30,11 +30,10 @@ class AuthService {
     }
 
 
-    else {
-     return  LoginScreen(email, password);
+    
     }
     }
-    }
+    return  LoginScreen(email, password);
   }
 
 }
