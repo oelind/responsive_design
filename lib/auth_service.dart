@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:responsive_design/login_screen.dart';
 
 class AuthService {
 
@@ -28,9 +29,10 @@ class AuthService {
       throw Exception('incorrect Password');
     }
 
-    //else {
-    //auth.successful;
-   // }
+
+    else {
+     return  LoginScreen(email, password);
+    }
     }
     }
   }

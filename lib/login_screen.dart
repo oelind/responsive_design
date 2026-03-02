@@ -134,6 +134,10 @@ class _LoginScreenState extends State<LoginScreen> {
     final email = _usernameController.text;
     final password = _passwordController.text;
 
+    if(password.length < 8){
+      print('Your password is too short. Please re-enter it' );
+    }
+
     try{
       await _AuthService.signIn(email: email, password: password);
 
